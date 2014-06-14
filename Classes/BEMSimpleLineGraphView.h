@@ -165,6 +165,17 @@
 /// Color of the label's text displayed on the X-Axis.
 @property (strong, nonatomic) UIColor *colorXaxisLabel;
 
+/// GraphViews that are underneath the current view.
+@property (strong, nonatomic) BEMSimpleLineGraphView * lowerGraph;
+
+/// BOOL to decide whether the lowerGraph responds to the touches.
+@property (nonatomic) BOOL lowerGraphShouldRecognizeTouches;
+
+/// String to put units on data point label text
+@property (strong, nonatomic) NSString * unitString;
+
+/// Color of the label's text displayed on the popups.
+@property (strong, nonatomic) UIColor * popupLabelTextColor;
 
 
 @end

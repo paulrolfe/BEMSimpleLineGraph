@@ -119,6 +119,7 @@
     _widthLine = 1.0;
     _sizePoint = 10.0;
     _colorPoint = [UIColor whiteColor];
+    _unitString=@"";
     _enableTouchReport = NO;
     _enablePopUpReport = NO;
     _enableBezierCurve = NO;
@@ -179,7 +180,8 @@
         
         if (self.enablePopUpReport == YES) {
             self.popUpLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 20)];
-            self.popUpLabel.text = [NSString stringWithFormat:@"%@", [self calculateMaximumPointValue]];
+            self.popUpLabel.text = [NSString stringWithFormat:@"%@ %@", [self calculateMaximumPointValue],self.unitString];
+            self.popUpLabel.textColor= self.popupLabelTextColor;
             self.popUpLabel.textAlignment = 1;
             self.popUpLabel.numberOfLines = 1;
             self.popUpLabel.font = self.labelFont;
@@ -573,6 +575,9 @@
 }
 
 - (void)handlePan:(UIPanGestureRecognizer *)recognizer {
+    if(self.lowerGraphShouldRecognizeTouches)
+        [self.lowerGraph handlePan:recognizer];
+    
     CGPoint translation = [recognizer locationInView:self.viewForBaselineLayout];
 
     if ((translation.x + self.frame.origin.x) <= self.frame.origin.x) { // To make sure the vertical line doesn't go beyond the frame of the graph.
@@ -643,7 +648,7 @@
     self.yCenterLabel = closestDot.center.y - closestDot.frame.size.height/2 - 15;
     self.popUpView.center = CGPointMake(self.xCenterLabel, self.yCenterLabel);
     self.popUpLabel.center = self.popUpView.center;
-    self.popUpLabel.text = [NSString stringWithFormat:@"%@", [dataPoints objectAtIndex:(NSInteger)closestDot.tag - 100]];
+    self.popUpLabel.text = [NSString stringWithFormat:@"%@ %@", [dataPoints objectAtIndex:(NSInteger)closestDot.tag - 100],self.unitString];
     
     if (self.popUpView.frame.origin.x <= 0) {
         self.xCenterLabel = self.popUpView.frame.size.width/2;
