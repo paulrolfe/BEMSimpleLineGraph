@@ -241,6 +241,7 @@ On iOS 7.0 and above you can take a snapshot of the line graph view and get a UI
 Add more lines to your graph by creating a new BEMSimpleLineGraph on top of your first graph's view. Make the top view's colors clear or at least transparent to see the lower graphs.
 
 Set the following two properties.
+
     //...where lowerGraphObject is the object you first made
     myGraph.lowerGraph = lowerGraphObject;
 
